@@ -1,6 +1,7 @@
 "use client";
 
 import { fetchAHostelBookings } from "@/api/Api";
+import { PropertyCardSkeleton } from "@/components/Skelton";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -42,7 +43,15 @@ useEffect(() => {
       </h1>
 
       <div className="flex flex-col gap-4">
-        {data.map((booking: any) => (
+        {
+        
+        (!data || data.length === 0)
+    ? Array.from({ length: 6 }).map((_, i) => (
+        <PropertyCardSkeleton key={i} />
+      ))
+    : 
+        
+        data.map((booking: any) => (
           <div
             key={booking?._id}
             className="flex flex-col sm:flex-row bg-white dark:bg-dark/20 border border-dark/10 dark:border-white/20 rounded-xl overflow-hidden shadow-sm"
