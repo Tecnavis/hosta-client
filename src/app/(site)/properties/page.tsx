@@ -14,7 +14,7 @@ const Page = () => {
         title="Book Direct"
         description="Contact trusted owners directly without middlemen"
       />
-      <PropertiesListing filter={filter} search={search} />
+      <PropertiesListing filter={filter} search={search} setSearch = {setSearch} setFilter = {setFilter} />
     </>
   );
 };

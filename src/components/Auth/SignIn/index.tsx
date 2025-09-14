@@ -40,7 +40,7 @@ const Signin = ({ signInOpen }: { signInOpen?: any }) => {
         toast.success("OTP sent successfully!");
         setPhoneNumber(values.phone); // save phone for OTP verification
         setOtpStep(true); // show OTP input
-        setTimer(4); // start timer
+        setTimer(30); // start timer
         setResendCount(1); // first attempt already done
       }
     } catch (error) {
@@ -60,7 +60,8 @@ const Signin = ({ signInOpen }: { signInOpen?: any }) => {
         toast.error("Failed to resend OTP");
       } else {
         toast.success("OTP resent successfully!");
-        setTimer(15); // restart timer
+        setTimer(30); // restart timer
+        setOtp(Array(6).fill(""));
         setResendCount((prev) => prev + 1);
       }
     } catch (err) {

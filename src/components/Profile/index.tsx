@@ -48,30 +48,40 @@ const Profile = () => {
       .required("Required"),
   });
 
-  const handleSubmit = async (values: any, { setSubmitting }: any) => {
-    try {
 
-      
-      const formData = new FormData();
-      formData.append("name", values.name);
-      formData.append("email", values.email);
-      formData.append("phone", values.phone);
-      if (values.image) formData.append("image", values.image);
-      
-      const res = await updateAUser(userId?._id, formData);
-      setUser(res.data.user); // updated user
-      setEditMode(false);
-    } catch (error) {
-      console.error("Update failed:", error);
-    } finally {
-      setSubmitting(false);
+
+  const handleSubmit = async (values: any, { setSubmitting }: any) => {
+  try {
+    const formData = new FormData();
+
+    formData.append("name", values.name);
+    formData.append("email", values.email);
+    formData.append("phone", values.phone);
+
+    // 🚀 Only append if it's a File (not URL string)
+        formData.append("existingPhotos", JSON.stringify(values.image));
+
+
+    if (values.image instanceof File) {
+      formData.append("image", values.image);
     }
-  };
+
+    const res = await updateAUser(userId?._id, formData);
+
+    setUser(res.data.user);
+    setEditMode(false);
+  } catch (error) {
+    console.error("Update failed:", error);
+  } finally {
+    setSubmitting(false);
+  }
+};
+
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white dark:bg-gray-900 shadow-lg rounded-2xl">
+<div className="max-w-6xl mx-auto p-6 bg-white dark:bg-gray-900 shadow-lg rounded-2xl">
       {/* Header */}
       <div className="flex justify-between items-center mb-8 border-b pb-4">
         <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
@@ -178,7 +188,7 @@ const Profile = () => {
                     />
                   </div>
                 ) : (
-                  <p className="text-lg">
+                  <p className="text-sm">
                     <span className="font-semibold">Email:</span>{" "}
                     {values.email || "-"}
                   </p>

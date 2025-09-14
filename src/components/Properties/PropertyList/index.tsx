@@ -2,19 +2,24 @@
 
 import PropertyCard from "@/components/Home/Properties/Card/Card";
 import { propertyHomes } from "@/app/api/propertyhomes";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { fetchHostelActive } from "@/api/Api";
 import { useRouter } from "next/navigation";
 import { PropertyCardSkeleton } from "@/components/Skelton";
+import { Button } from "@/components/ui/button";
 
 type PropertiesListingProps = {
   filter: string;
   search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
+   setFilter: Dispatch<SetStateAction<string>>;
 };
 
 const PropertiesListing: React.FC<PropertiesListingProps> = ({
   filter,
   search,
+  setSearch,
+  setFilter,
 }) => {
   const [data, setData] = useState<any>(null);
 
@@ -33,7 +38,6 @@ const PropertiesListing: React.FC<PropertiesListingProps> = ({
 
     loadData();
   }, []);
-
 
   // 1️⃣ Filter
   let filterData = data?.filter((hostel: any) => {
@@ -74,23 +78,38 @@ const PropertiesListing: React.FC<PropertiesListingProps> = ({
     );
   }
 
+  const handleShow = async () => {
+    setFilter("");
+    setSearch("");
+     const res = await fetchHostelActive();
+      setData(res);
+  };
+
   return (
     <section className="pt-0!">
+      <Button onClick={handleShow} className="mb-10  ml-8 cursor-pointer text-white">Show all</Button>
+
       <div className="container max-w-8xl mx-auto px-5 2xl:px-0">
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-5">
-          {!data || data.length === 0
-            ? Array.from({ length: 6 }).map((_, i) => (
-                <PropertyCardSkeleton key={i} />
-              ))
-            : filterData?.map((item: any) => (
-                <div key={item?._id} className="">
-                  <PropertyCard
-                    item={item}
-                    router={router}
-                    textColor={"text-black"}
-                  />
-                </div>
-              ))}
+        <div className={`grid ${filterData?.length !== 0 ? "grid-cols-2 " : "grid-cols-1"} lg:grid-cols-3 gap-5`}>
+          {!data || data.length === 0 ? (
+            Array.from({ length: 6 }).map((_, i) => (
+              <PropertyCardSkeleton key={i} />
+            ))
+          ) : filterData?.length !== 0 ? (
+            filterData?.map((item: any) => (
+              <div key={item?._id} className="">
+                <PropertyCard
+                  item={item}
+                  router={router}
+                  textColor={"text-black"}
+                />
+              </div>
+            ))
+          ) : (
+            <div className="flex flex-col items-center   justify-center h-64 text-gray-500">
+              <p className="text-lg font-medium">No Hostel Registered</p>
+            </div>
+          )}
         </div>
       </div>
     </section>
