@@ -16,6 +16,7 @@ const Header: React.FC = () => {
   const pathname = usePathname()
 
 const router = useRouter();
+var user = JSON.parse(localStorage.getItem("user") || "null");
 
   const sideMenuRef = useRef<HTMLDivElement>(null)
 
@@ -42,13 +43,17 @@ const router = useRouter();
   const isHomepage = pathname === '/'
 
     const handleNavigate = () => {
-const user = JSON.parse(localStorage.getItem("user") || "null");
     if (user && user?._id) {
       router.push(`/profile`);
     } else {
       router.push("/signin");
     }
   };
+
+  const handleLogout = () => {
+      localStorage.removeItem("user");
+      router.push("/signin")
+  }
 
   return (
     <header className={`fixed h-24 py-1 z-50 w-full bg-transparent transition-all duration-300 lg:px-0 px-4 ${sticky ? "top-3" : "top-0"}`}>
@@ -168,9 +173,19 @@ const user = JSON.parse(localStorage.getItem("user") || "null");
                   <NavLink key={index} item={item} onClick={() => setNavbarOpen(false)} />
                 ))}
                 <li className='flex items-center gap-4'>
+                  {
+                user?._id ?
+
+                  <span onClick={handleLogout} className='cursor-pointer py-4 px-8 bg-primary text-base leading-4 block w-fit text-white rounded-full border border-primary font-semibold mt-3 hover:bg-transparent hover:text-primary duration-300'>
+                    Logout
+                  </span>
+                  :
                   <Link href="/signin" className='py-4 px-8 bg-primary text-base leading-4 block w-fit text-white rounded-full border border-primary font-semibold mt-3 hover:bg-transparent hover:text-primary duration-300'>
                     Sign In
                   </Link>
+
+                  }
+
                   <button onClick={handleNavigate} className='cursor-pointer py-4 px-8 bg-transparent border border-primary text-base leading-4 block w-fit text-primary rounded-full font-semibold mt-3 hover:bg-primary hover:text-white duration-300'>
                     <User />
                   </button>
