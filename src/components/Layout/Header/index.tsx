@@ -14,9 +14,17 @@ const Header: React.FC = () => {
   const [navbarOpen, setNavbarOpen] = useState(false)
   const { theme, setTheme } = useTheme()
   const pathname = usePathname()
+    const [user, setUser] = useState<any>(null) 
+
 
 const router = useRouter();
- const  user = JSON.parse(localStorage.getItem("user") || "null");
+
+   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem("user")
+      if (stored) setUser(JSON.parse(stored))
+    }
+  }, [])
 
   const sideMenuRef = useRef<HTMLDivElement>(null)
 
