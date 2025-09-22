@@ -16,7 +16,7 @@ const Header: React.FC = () => {
   const pathname = usePathname()
 
 const router = useRouter();
-var user = JSON.parse(localStorage.getItem("user") || "null");
+ const  user = JSON.parse(localStorage.getItem("user") || "null");
 
   const sideMenuRef = useRef<HTMLDivElement>(null)
 

@@ -58,8 +58,11 @@ export default function Details() {
     loadReviewData();
   }, []);
 
+
+  let item: any;
+
   if (data) {
-    var item = data[0];
+     item = data[0];
   }
 
   const breakdown = item?.hostelId?.rating?.details?.reduce(
