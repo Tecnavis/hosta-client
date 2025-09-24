@@ -70,18 +70,18 @@ const router = useRouter();
           <div>
             <Link href='/'>
               <Image
-                src={'/images/header/dark-logo.svg'}
+                src={'/images/header/dark-logo.png'}
                 alt='logo'
-                width={150}
-                height={68}
+                width={70}
+                height={58}
                 unoptimized={true}
                 className={`${isHomepage ? sticky ? "block dark:hidden" : "hidden" : sticky ? "block dark:hidden" : "block dark:hidden"}`}
               />
               <Image
-                src={'/images/header/logo.svg'}
+                src={'/images/header/logo.png'}
                 alt='logo'
-                width={150}
-                height={68}
+                width={80}
+                height={58}
                 unoptimized={true}
                 className={`${isHomepage ? sticky ? "hidden dark:block" : "block" : sticky ? "dark:block hidden" : "dark:block hidden"}`}
               />
