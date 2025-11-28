@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = process.env.NEXT_PUBLIC_API_URI;
+export const API = process.env.NEXT_PUBLIC_API_URI;
 
 export const fetchHostelActive = async () => {
   const response = await axios.get(`${API}/hostels/active`);
@@ -79,4 +79,6 @@ export const updateAUser = async (id, formData) => {
   });
   return response;
 };
+
+
 

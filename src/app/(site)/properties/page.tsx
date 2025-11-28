@@ -5,7 +5,7 @@ import PropertiesListing from "@/components/Properties/PropertyList";
 import React from "react";
 import { useAppContext } from "@/context/AppContext";
 
-const Page = () => {
+const FirstPage = () => {
   const { search, setSearch, filter, setFilter } = useAppContext();
 
   return (
@@ -19,4 +19,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default FirstPage;

@@ -4,7 +4,7 @@ import { FooterLinks } from "@/app/api/footerlinks";
 
 const Footer = () => {
   return (
-    <footer className=" hidden sm:block relative z-10 bg-dark">
+    <footer className=" hidden sm:block mt-6 relative z-10 bg-dark">
       
       <div className="container mx-auto max-w-8xl pt-14 px-4 sm:px-6 lg:px-0">
         <div className="py-16 border-b border-white/10">

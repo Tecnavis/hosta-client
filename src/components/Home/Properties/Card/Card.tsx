@@ -77,7 +77,7 @@ const user = JSON.parse(localStorage.getItem("user") || "null");
                 >
                   {LucideIcon && (
                     <LucideIcon
-                      className={`${textColor}`}
+                    
                       width={16}
                       height={16}
                     />
@@ -94,7 +94,7 @@ const user = JSON.parse(localStorage.getItem("user") || "null");
             <div className="flex flex-col gap-1 pl-2">
               <Icon
                 icon="lineicons:arrow-all-direction"
-                className={`${textColor}`}
+             
                 width={16}
                 height={16}
               />

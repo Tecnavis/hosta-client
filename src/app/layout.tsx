@@ -7,6 +7,7 @@ import { ThemeProvider } from 'next-themes'
 import NextTopLoader from 'nextjs-toploader';
 import SessionProviderComp from '@/components/nextauth/SessionProvider'
 import { AppProvider } from '@/context/AppContext'
+import { Toaster } from "sonner";
 
 const font = Bricolage_Grotesque({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={`${font.className} bg-white dark:bg-black antialiased`}>
         <NextTopLoader color="#07be8a" />
+        <Toaster position='top-right' />
         <AppProvider>
         <SessionProviderComp session={session}>
           <ThemeProvider

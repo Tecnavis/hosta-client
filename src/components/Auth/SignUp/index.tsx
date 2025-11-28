@@ -7,6 +7,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Eye, EyeOff } from "lucide-react"; // eye icon for show/hide password
 import { userSignup } from "@/api/Api";
+import { toast } from "sonner";
 
 const SignUp = ({ signUpOpen }: { signUpOpen?: any }) => {
   const router = useRouter();
@@ -35,8 +36,11 @@ const SignUp = ({ signUpOpen }: { signUpOpen?: any }) => {
         resetForm();
         router.push("/signin");
       }
-    } catch (error) {
-      console.error("Error signing up:", error);
+    } catch (error:any) {
+        const msg =
+    error.response?.data?.message || "Server error!";
+
+  toast.error(msg);
     } finally {
       setSubmitting(false);
     }

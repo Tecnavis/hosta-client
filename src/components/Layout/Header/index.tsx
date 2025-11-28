@@ -58,13 +58,13 @@ const router = useRouter();
     }
   };
 
-  const handleLogout = () => {
-      localStorage.removeItem("user");
-      router.push("/signin")
-  }
+const handleLogout = () => {
+  localStorage.removeItem("user");
+  window.location.href = "/"; // Full reload to home page
+};
 
   return (
-    <header className={`fixed h-24 py-1 z-50 w-full bg-transparent transition-all duration-300 lg:px-0 px-4 ${sticky ? "top-3" : "top-0"}`}>
+    <header  className={`fixed h-24 py-1 z-50 w-full bg-transparent transition-all duration-300 lg:px-0 px-4 ${sticky ? "top-3" : "top-0"}`}>
       <nav className={`container mx-auto max-w-8xl flex items-center justify-between py-4 duration-300 ${sticky ? "shadow-lg bg-white dark:bg-dark rounded-full top-5 px-4 " : "shadow-none top-0"}`}>
         <div className='flex justify-between items-center gap-2 w-full'>
           <div>
@@ -111,7 +111,7 @@ const router = useRouter();
               />
             </button>
             <div className={`hidden md:block`}>
-              <Link href='#' className={`text-base text-inherit flex items-center gap-2 border-r pr-6 ${isHomepage
+              <Link  href="tel:+919496086080" className={`text-base text-inherit flex items-center gap-2 border-r pr-6 ${isHomepage
                 ? sticky
                   ? 'text-dark dark:text-white hover:text-primary border-dark dark:border-white'
                   : 'text-white hover:text-primary'
@@ -119,7 +119,7 @@ const router = useRouter();
                 }`}
               >
                 <Icon icon={'ph:phone-bold'} width={24} height={24} />
-                +1-212-456-789
+                9496086080
               </Link>
             </div>
             <div>
@@ -206,12 +206,14 @@ const router = useRouter();
             <p className='text-base sm:text-xm font-normal text-white/40'>
               Contact
             </p>
-            <Link href="#" className='text-base sm:text-xm font-medium text-inherit hover:text-primary'>
-              hello@hostay.com
-            </Link>
-            <Link href="#" className='text-base sm:text-xm font-medium text-inherit hover:text-primary'>
-              +1-212-456-7890{' '}
-            </Link>
+         <Link href="mailto:Hostayofficial@gmail.com" className="text-base sm:text-xm font-medium text-inherit hover:text-primary">
+  Hostayofficial@gmail.com
+</Link>
+
+<Link href="tel:+919496086080" className="text-base sm:text-xm font-medium text-inherit hover:text-primary">
+  9496086080
+</Link>
+
           </div>
         </div>
       </div>

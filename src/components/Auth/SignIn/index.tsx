@@ -3,12 +3,12 @@ import { useState, useEffect, useContext } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import toast from "react-hot-toast";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import AuthDialogContext from "@/app/context/AuthDialogContext";
 import Logo from "@/components/Layout/Header/BrandLogo/Logo";
 import { userOtp, userSignin } from "@/api/Api"; // your backend API calls
+import { toast } from "sonner";
 
 const Signin = ({ signInOpen }: { signInOpen?: any }) => {
   const { data: session } = useSession();
@@ -32,6 +32,8 @@ const Signin = ({ signInOpen }: { signInOpen?: any }) => {
   // ✅ Handle phone submit
   const handleSubmit = async (values: any, { setSubmitting }: any) => {
     try {
+     
+      
       const res: any = await userSignin(values);
 
       if (res?.error) {
@@ -43,9 +45,12 @@ const Signin = ({ signInOpen }: { signInOpen?: any }) => {
         setTimer(30); // start timer
         setResendCount(1); // first attempt already done
       }
-    } catch (error) {
-      console.error("Error logging in:", error);
-      toast.error("Something went wrong");
+    } catch (error: any) {
+     
+              const msg =
+    error.response?.data?.message || "Server error!";
+
+  toast.error(msg);
     } finally {
       setSubmitting(false);
     }
@@ -136,7 +141,8 @@ const Signin = ({ signInOpen }: { signInOpen?: any }) => {
           JSON.stringify(response?.data?.userDetails)
         );
         toast.success("OTP Verified");
-        router.push("/");
+        window.location.href = "/"; 
+
       } else {
         toast.error("Invalid OTP");
       }

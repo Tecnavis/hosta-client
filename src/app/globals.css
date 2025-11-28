@@ -70,9 +70,9 @@ html {
   /* Firefox */
 }
 
-section {
-  @apply py-24
-}
+/* section {
+  @apply py-10
+} */
 
 .blog-details p, .blog-details hr {
   @apply mb-8;

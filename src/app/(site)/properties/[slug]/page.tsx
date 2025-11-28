@@ -15,6 +15,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { formatDistanceToNowStrict, parseISO } from "date-fns";
 import { RatingBreakdown } from "../StarRating";
 import { PropertyCardSkeleton } from "@/components/Skelton";
+import { toast } from "sonner";
 
 export default function Details() {
   const { slug } = useParams();
@@ -96,9 +97,14 @@ export default function Details() {
           const res = await fetchAHostelRoom(slug);
 
         setData(res);    
+        toast.success("Review added!")
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error posting review:", error);
+              const msg =
+          error.response?.data?.message || "Server error!";
+      
+        toast.error(msg);
     }
   };
 
@@ -121,13 +127,18 @@ export default function Details() {
           const res = await fetchAHostelRoom(slug);
         setData(res);
       }
-    } catch (error) {
+
+    } catch (error: any) {
       console.error("Error posting review:", error);
+              const msg =
+    error.response?.data?.message || "Server error!";
+
+  toast.error(msg);
     }
   };
 
   return (
-    <section className="!pt-44 pb-20 relative">
+    <section className="relative mt-28">
       {data == null ? (
         Array.from({ length: 6 }).map((_, i) => (
           <PropertyCardSkeleton key={i} />

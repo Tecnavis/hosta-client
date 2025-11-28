@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { fetchAUser, updateAUser } from "@/api/Api";
 import { Camera, Edit2, Save, X } from "lucide-react";
+import { toast } from "sonner";
 
 const Profile = () => {
   const [user, setUser] = useState<any>(null);
@@ -29,8 +30,11 @@ const Profile = () => {
       try {
         const res = await fetchAUser(userId._id);
         setUser(res);
-      } catch (err) {
-        console.error("Error fetching profile:", err);
+      } catch (error: any) {
+          const msg =
+    error.response?.data?.message || "Server error!";
+
+  toast.error(msg);
       } finally {
         setLoading(false);
       }
@@ -70,8 +74,12 @@ const Profile = () => {
 
     setUser(res.data.user);
     setEditMode(false);
-  } catch (error) {
-    console.error("Update failed:", error);
+    toast.success("Profile update success fully!")
+  } catch (error : any) {
+      const msg =
+    error.response?.data?.message || "Server error!";
+
+  toast.error(msg);
   } finally {
     setSubmitting(false);
   }

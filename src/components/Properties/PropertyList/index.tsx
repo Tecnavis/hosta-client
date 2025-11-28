@@ -86,8 +86,8 @@ const PropertiesListing: React.FC<PropertiesListingProps> = ({
   };
 
   return (
-    <section className="pt-0!">
-      <Button onClick={handleShow} className="mb-10  ml-8 cursor-pointer text-white">Show all</Button>
+    <section className="pt-2!">
+      <Button onClick={handleShow} className="mb-10 mt-3  ml-8 cursor-pointer text-white">Show all</Button>
 
       <div className="container max-w-8xl mx-auto px-5 2xl:px-0">
         <div className={`grid ${filterData?.length !== 0 ? "grid-cols-2 " : "grid-cols-1"} lg:grid-cols-3 gap-5`}>

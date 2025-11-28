@@ -4,6 +4,7 @@ import { fetchAHostelBookings } from "@/api/Api";
 import { PropertyCardSkeleton } from "@/components/Skelton";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const statusColors: Record<string, string> = {
   pending: "bg-yellow-100 text-yellow-800",
@@ -26,8 +27,11 @@ useEffect(() => {
       try {
         const res = await fetchAHostelBookings(parsedUser._id);        
         setData(res);
-      } catch (err) {
-        console.error("Failed to fetch hostels bookings:", err);
+      } catch (error: any) {
+          const msg =
+    error.response?.data?.message || "Server error!";
+
+  toast.error(msg);
       }
     };
 

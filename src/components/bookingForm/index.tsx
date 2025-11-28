@@ -2,6 +2,7 @@
 
 import { postAHostelBooking } from "@/api/Api";
 import React, { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export default function BookingForm({ isOpen, onClose,  hostelId, data }) {
   const [formData, setFormData] = useState({
@@ -52,8 +53,11 @@ export default function BookingForm({ isOpen, onClose,  hostelId, data }) {
       if (response.status === 201) {
         onClose();
       }
-    } catch (error) {
-      console.error("Error posting booking:", error);
+    } catch (error: any) {
+              const msg =
+    error.response?.data?.message || "Server error!";
+
+  toast.error(msg);
     }
   };
 

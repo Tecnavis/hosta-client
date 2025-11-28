@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const ErrorPage = () => {
   return (
     <>
-      <section className="flex justify-center pb-0!">
+      <section className="flex justify-center mt-40 pb-0!">
         <Image
           src="/images/404.png"
           alt="404"
